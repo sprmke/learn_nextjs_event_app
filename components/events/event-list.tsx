@@ -1,12 +1,23 @@
-import React from 'react';
+import { Event } from '../../types';
 import EventItem from './event-item';
 
-const EventList = ({ items }) => {
+interface EventListProps {
+  items: Event[];
+}
+
+const EventList = ({ items }: EventListProps) => {
   return (
     <ul>
-      {items.map((item) => {
-        <EventItem />;
-      })}
+      {items.map(({ id, title, image, date, location }: Event) => (
+        <EventItem
+          key={id}
+          id={id}
+          title={title}
+          image={image}
+          date={date}
+          location={location}
+        />
+      ))}
     </ul>
   );
 };

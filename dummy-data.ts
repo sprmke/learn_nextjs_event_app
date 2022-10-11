@@ -1,4 +1,6 @@
-const DUMMY_EVENTS = [
+import { Event } from './types';
+
+const DUMMY_EVENTS: Event[] = [
   {
     id: 'e1',
     title: 'Programming for everyone',
@@ -32,7 +34,7 @@ const DUMMY_EVENTS = [
 ];
 
 export function getFeaturedEvents() {
-  return DUMMY_EVENTS.filter((event) => event.isFeatured);
+  return DUMMY_EVENTS.filter((event: Event) => event.isFeatured);
 }
 
 export function getAllEvents() {
@@ -52,6 +54,6 @@ export function getFilteredEvents(dateFilter) {
   return filteredEvents;
 }
 
-export function getEventById(id) {
+export function getEventById(id: string) {
   return DUMMY_EVENTS.find((event) => event.id === id);
 }
