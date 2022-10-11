@@ -5,5 +5,6 @@ export interface Event {
   location: string;
   date: string;
   image: string;
+  imageAlt?: string;
   isFeatured?: boolean;
 }
