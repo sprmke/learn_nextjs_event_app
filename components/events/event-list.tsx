@@ -1,5 +1,6 @@
 import { Event } from '../../types';
 import EventItem from './event-item';
+import classes from './event-list.module.css';
 
 interface EventListProps {
   items: Event[];
@@ -7,7 +8,7 @@ interface EventListProps {
 
 const EventList = ({ items }: EventListProps) => {
   return (
-    <ul>
+    <ul className={classes.list}>
       {items.map(({ id, title, image, date, location }: Event) => (
         <EventItem
           key={id}

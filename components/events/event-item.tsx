@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Event } from '../../types';
+import classes from './event-item.module.css';
 
 const EventItem = ({ id, title, image, date, location }: Event) => {
   const readableDate = new Date(date).toLocaleDateString('en-US', {
@@ -12,15 +13,15 @@ const EventItem = ({ id, title, image, date, location }: Event) => {
   const exploreLink = `/events/${id}`;
 
   return (
-    <li>
+    <li className={classes.item}>
       <img src={`/${image}`} alt={title} />
-      <div>
-        <div>
+      <div className={classes.content}>
+        <div className={classes.summary}>
           <h2>{title}</h2>
-          <div>
+          <div className={classes.date}>
             <time>{readableDate}</time>
           </div>
-          <div>
+          <div className={classes.actions}>
             <address>{formattedAddress}</address>
           </div>
         </div>
