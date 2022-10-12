@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import EventContent from '../../components/event-detail/event-content';
 import EventLogistics from '../../components/event-detail/event-logistics';
 import EventSummary from '../../components/event-detail/event-summary';
+import ErrorAlert from '../../components/ui/error-alert';
 import { getEventById } from '../../dummy-data';
 import { Event } from '../../types';
 
@@ -12,7 +13,11 @@ const EventDetailPage = () => {
   const { title, description, date, location, image, imageAlt } = event;
 
   if (!event) {
-    return <p>No event found!</p>;
+    return (
+      <ErrorAlert>
+        <p>No event found!</p>
+      </ErrorAlert>
+    );
   }
 
   return (
