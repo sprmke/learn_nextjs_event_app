@@ -10,7 +10,7 @@ const EventDetailPage = () => {
   const router = useRouter();
   const eventId = (router.query?.eventId as string) ?? '';
   const event: Event = getEventById(eventId);
-  const { title, description, date, location, image, imageAlt } = event;
+  const { title, description, date, location, image, imageAlt } = event ?? {};
 
   if (!event) {
     return (
