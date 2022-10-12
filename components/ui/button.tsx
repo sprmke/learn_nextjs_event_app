@@ -1,16 +1,29 @@
 import Link from 'next/link';
-import { PropsWithChildren } from 'react';
+import { MouseEvent, PropsWithChildren } from 'react';
 import classes from './button.module.css';
 
 interface ButtonProps {
-  link: string;
+  link?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button = ({ link, children }: PropsWithChildren<ButtonProps>) => {
+const Button = ({
+  link,
+  onClick,
+  children,
+}: PropsWithChildren<ButtonProps>) => {
+  if (link) {
+    return (
+      <Link href={link}>
+        <a className={classes.btn}>{children}</a>
+      </Link>
+    );
+  }
+
   return (
-    <Link href={link}>
-      <a className={classes.btn}>{children}</a>
-    </Link>
+    <button className={classes.btn} onClick={() => onClick}>
+      {children}
+    </button>
   );
 };
 

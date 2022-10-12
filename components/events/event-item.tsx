@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Event } from '../../types';
 import Button from '../ui/button';
 import classes from './event-item.module.css';
