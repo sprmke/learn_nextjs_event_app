@@ -1,7 +1,7 @@
 import { Event } from '../types';
 
 export const getAllEvents = async () => {
-  const response = await fetch(process.env.REACT_APP_FIREBASE_URL);
+  const response = await fetch(process.env.NEXT_PUBLIC_FIREBASE_URL);
   const data = await response.json();
 
   const events: Event[] | [] = Object.values(data);
@@ -19,11 +19,14 @@ export const getEventById = async (id: string) => {
   return allEvents.find((event) => event.id === id);
 };
 
-export const getFilteredEvents = async (dateFilter: {
-  year: number;
-  month: number;
-}) => {
-  const allEvents = await getAllEvents();
+export const getFilteredEvents = async (
+  events: Event[],
+  dateFilter: {
+    year: number;
+    month: number;
+  }
+) => {
+  const allEvents = events?.length > 0 ? events : await getAllEvents();
   const { year, month } = dateFilter;
 
   let filteredEvents = allEvents.filter((event) => {
