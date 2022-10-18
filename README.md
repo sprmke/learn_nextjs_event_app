@@ -6,5 +6,5 @@
 
 ##### Application Scope:
 
-- S4: Event App (Pages & File-based Routing)
-- Topics discussed: Apply NextJS Pages & File-based Routing Topics
+- S4-&-6: Event App (Pages & File-based Routing, Pre-rendering & Data Fetching)
+- Topics discussed: Apply NextJS Pages & File-based Routing, Pre-rendering & Data Fetching Topics
