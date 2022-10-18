@@ -5,7 +5,6 @@ export const getAllEvents = async () => {
   const data = await response.json();
 
   const events: Event[] | [] = Object.values(data);
-  console.log('events::', events);
 
   return events;
 };
@@ -13,4 +12,9 @@ export const getAllEvents = async () => {
 export const getFeaturedEvents = async () => {
   const allEvents = await getAllEvents();
   return allEvents.filter((event: Event) => event.isFeatured);
+};
+
+export const getEventById = async (id: string) => {
+  const allEvents = await getAllEvents();
+  return allEvents.find((event) => event.id === id);
 };
