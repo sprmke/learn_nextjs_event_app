@@ -44,6 +44,10 @@ const FitleredEventsPage = () => {
   ) {
     return (
       <div className='center'>
+        <MetaHead
+          title='Filtered Events'
+          description='A list of filtered events'
+        />
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values</p>
         </ErrorAlert>
@@ -52,9 +56,25 @@ const FitleredEventsPage = () => {
     );
   }
 
-  if (!filteredEvents || filteredEvents.length === 0) {
+  if (!filteredEvents) {
+    return (
+      <>
+        <MetaHead
+          title='Filtered Events'
+          description='A list of filtered events'
+        />
+        <p className='center'>Loading...</p>
+      </>
+    );
+  }
+
+  if (filteredEvents && filteredEvents?.length === 0) {
     return (
       <div className='center'>
+        <MetaHead
+          title='Filtered Events'
+          description={`All events for ${numMonth}/${numYear}`}
+        />
         <ErrorAlert>
           <p>No events found for the chosen filter!</p>
         </ErrorAlert>
