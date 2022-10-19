@@ -9,7 +9,7 @@ type MetaheadProps = {
 const MetaHead = ({ title, description, viewport }: MetaheadProps) => {
   return (
     <Head>
-      <title>{title}</title>
+      {title && <title>{title}</title>}
       {description && <meta name='description' content={description} />}
       {viewport && <meta name='viewport' content={viewport} />}
     </Head>
