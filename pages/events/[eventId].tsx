@@ -7,6 +7,7 @@ import {
 import EventContent from '../../components/event-detail/event-content';
 import EventLogistics from '../../components/event-detail/event-logistics';
 import EventSummary from '../../components/event-detail/event-summary';
+import MetaHead from '../../components/meta/meta-head';
 import { getEventById, getFeaturedEvents } from '../../helpers/api-util';
 import { Event } from '../../types';
 
@@ -29,6 +30,10 @@ const EventDetailPage = ({
 
   return (
     <>
+      <MetaHead
+        title={title}
+        description={description}
+      />
       <EventSummary title={title} />
       <EventLogistics
         date={date}

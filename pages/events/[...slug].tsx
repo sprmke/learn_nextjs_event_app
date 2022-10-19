@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import EventList from '../../components/events/event-list';
 import ResultsTitle from '../../components/events/results-title';
+import MetaHead from '../../components/meta/meta-head';
 import Button from '../../components/ui/button';
 import ErrorAlert from '../../components/ui/error-alert';
 import { getFilteredEvents } from '../../helpers/api-util';
@@ -66,6 +67,10 @@ const FitleredEventsPage = () => {
 
   return (
     <>
+      <MetaHead
+        title='Filtered Events'
+        description={`All events for ${numMonth}/${numYear}`}
+      />
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </>
