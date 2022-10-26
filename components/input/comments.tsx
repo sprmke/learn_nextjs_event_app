@@ -12,6 +12,7 @@ type CommentsProps = {
 const Comments = ({ eventId }: CommentsProps) => {
   const [comments, setComments] = useState<Comment[] | []>([]);
   const [showComments, setShowComments] = useState(false);
+  const [hasNewcomment, setHasNewcomment] = useState(false);
 
   useEffect(() => {
     const getComments = async () => {
@@ -19,12 +20,12 @@ const Comments = ({ eventId }: CommentsProps) => {
       const data = await response.json();
       const { comments }: { comments: Comment[] } = data;
       setComments(comments);
+      setHasNewcomment(false);
     };
-
-    if (showComments) {
+    if (showComments || hasNewcomment) {
       getComments();
     }
-  }, [showComments]);
+  }, [showComments, hasNewcomment]);
 
   function toggleCommentsHandler() {
     setShowComments((prevStatus) => !prevStatus);
@@ -41,7 +42,7 @@ const Comments = ({ eventId }: CommentsProps) => {
     });
 
     const data = await response.json();
-    console.log('data::', data);
+    setHasNewcomment(true);
   };
 
   return (
@@ -50,7 +51,9 @@ const Comments = ({ eventId }: CommentsProps) => {
         {showComments ? 'Hide' : 'Show'} Comments
       </button>
       {showComments && <NewComment onAddComment={addCommentHandler} />}
-      {showComments && <CommentList comments={comments} />}
+      {showComments && comments?.length > 0 && (
+        <CommentList comments={comments} />
+      )}
     </section>
   );
 };

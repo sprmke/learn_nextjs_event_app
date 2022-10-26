@@ -13,6 +13,12 @@ const NewComment = ({ onAddComment }: NewCommentProps) => {
   const nameInputRef = useRef<HTMLInputElement>(null!);
   const commentInputRef = useRef<HTMLTextAreaElement>(null!);
 
+  const resetFormInputs = () => {
+    emailInputRef.current.value = '';
+    nameInputRef.current.value = '';
+    commentInputRef.current.value = '';
+  };
+
   const sendCommentHandler = (event: FormEvent) => {
     event.preventDefault();
 
@@ -38,6 +44,8 @@ const NewComment = ({ onAddComment }: NewCommentProps) => {
       name: enteredName,
       text: enteredComment,
     });
+
+    resetFormInputs();
   };
 
   return (

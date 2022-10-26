@@ -1,4 +1,3 @@
-import { title } from 'process';
 import { Comment } from '../../types';
 import classes from './comment-list.module.css';
 
@@ -9,8 +8,8 @@ type CommentListProps = {
 const CommentList = ({ comments }: CommentListProps) => {
   return (
     <ul className={classes.comments}>
-      {comments.map(({ email, name, text }, index) => (
-        <li key={index}>
+      {comments?.map(({ _id, email, name, text }) => (
+        <li key={_id.toString()}>
           <p>{text}</p>
           <div>
             By{' '}

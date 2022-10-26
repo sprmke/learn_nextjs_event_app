@@ -1,20 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { MongoClient } from 'mongodb';
 import { Comment } from '../../../types';
+import { getCommentsByEventId, addComment } from '../../../lib/database';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case 'GET': {
-      const { eventId } = req.query;
+      const { eventId } = req.query as { eventId: string };
 
-      // get comments from database
-      const comments = [
-        {
-          name: 'Mike',
-          email: 'mike@test.com',
-          text: 'My comment is amazing!',
-        },
-      ];
+      const comments = await getCommentsByEventId(eventId);
 
       res.status(200).json({ message: 'Success', comments });
       break;
@@ -39,19 +32,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       // save comment to database
       const comment: Comment = { email, name, text, eventId };
-      const MONGODB_CONNECTION_STRING =
-        process.env.NEXT_APP_MONGODB_CONNECTION_STRING ?? '';
 
-      // connect to database
-      const client = await MongoClient.connect(MONGODB_CONNECTION_STRING);
-      const db = client.db();
-
-      // get the meetups collection and insert meetup form data
-      const commentsColelction = db.collection('comments');
-      const result = await commentsColelction.insertOne({ comment });
-
-      // close the database connection
-      client.close();
+      const result = await addComment(comment);
 
       res
         .status(201)

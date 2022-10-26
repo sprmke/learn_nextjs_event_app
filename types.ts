@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb';
+
 export type Event = {
   id: string;
   title: string;
@@ -10,6 +12,7 @@ export type Event = {
 };
 
 export type Comment = {
+  _id?: ObjectId;
   email: string;
   name: string;
   text: string;

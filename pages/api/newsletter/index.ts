@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { MongoClient } from 'mongodb';
+import { signUpNewsletter } from '../../../lib/database';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case 'POST': {
       const { email } = req.body;
-      console.log('email::', email);
 
       // validate input
       if (!email || email.trim() === '' || !email.includes('@')) {
@@ -13,20 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return;
       }
 
-      // save email to database
-      const MONGODB_CONNECTION_STRING =
-        process.env.NEXT_APP_MONGODB_CONNECTION_STRING ?? '';
-
-      // connect to database
-      const client = await MongoClient.connect(MONGODB_CONNECTION_STRING);
-      const db = client.db();
-
-      // get the meetups collection and insert meetup form data
-      const meetupsCollection = db.collection('newsletters');
-      const result = await meetupsCollection.insertOne({ email });
-
-      // close the database connection
-      client.close();
+      const result = await signUpNewsletter(email);
 
       res.status(201).json({ message: 'Successfully registered' });
 
