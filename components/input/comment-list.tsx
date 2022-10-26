@@ -1,21 +1,25 @@
+import { title } from 'process';
+import { Comment } from '../../types';
 import classes from './comment-list.module.css';
 
-const CommentList = () => {
+type CommentListProps = {
+  comments: Comment[];
+};
+
+const CommentList = ({ comments }: CommentListProps) => {
   return (
     <ul className={classes.comments}>
-      {/* Render list of comments - fetched from API */}
-      <li>
-        <p>My comment is amazing!</p>
-        <div>
-          By <address>Maximilian</address>
-        </div>
-      </li>
-      <li>
-        <p>My comment is amazing!</p>
-        <div>
-          By <address>Maximilian</address>
-        </div>
-      </li>
+      {comments.map(({ email, name, text }, index) => (
+        <li key={index}>
+          <p>{text}</p>
+          <div>
+            By{' '}
+            <address>
+              {name} | {email}
+            </address>
+          </div>
+        </li>
+      ))}
     </ul>
   );
 };
