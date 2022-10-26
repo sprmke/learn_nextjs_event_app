@@ -3,10 +3,12 @@ import {
   GetStaticProps,
   GetStaticPropsContext,
   InferGetStaticPropsType,
+  NextPage,
 } from 'next';
 import EventContent from '../../components/event-detail/event-content';
 import EventLogistics from '../../components/event-detail/event-logistics';
 import EventSummary from '../../components/event-detail/event-summary';
+import Comments from '../../components/input/comments';
 import MetaHead from '../../components/meta/meta-head';
 import { getEventById, getFeaturedEvents } from '../../helpers/api-util';
 import { Event } from '../../types';
@@ -15,10 +17,10 @@ type PageParams = {
   eventId: string;
 };
 
-const EventDetailPage = ({
+const EventDetailPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   event,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { title, description, date, location, image, imageAlt } = event;
+}) => {
+  const { id, title, description, date, location, image, imageAlt } = event;
 
   if (!event) {
     return (
@@ -30,10 +32,7 @@ const EventDetailPage = ({
 
   return (
     <>
-      <MetaHead
-        title={title}
-        description={description}
-      />
+      <MetaHead title={title} description={description} />
       <EventSummary title={title} />
       <EventLogistics
         date={date}
@@ -44,13 +43,14 @@ const EventDetailPage = ({
       <EventContent>
         <p>{description}</p>
       </EventContent>
+      <Comments eventId={id} />
     </>
   );
 };
 
 export default EventDetailPage;
 
-export const getStaticProps: GetStaticProps = async ({
+export const getStaticProps: GetStaticProps<{ event: Event }> = async ({
   params,
 }: GetStaticPropsContext<PageParams>) => {
   const { eventId } = params;

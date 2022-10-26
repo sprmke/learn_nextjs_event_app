@@ -1,3 +1,4 @@
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import EventList from '../../components/events/event-list';
@@ -8,7 +9,7 @@ import ErrorAlert from '../../components/ui/error-alert';
 import { getFilteredEvents } from '../../helpers/api-util';
 import { Event } from '../../types';
 
-const FitleredEventsPage = () => {
+const FitleredEventsPage: NextPage = () => {
   const router = useRouter();
   const { slug: filterData = [] }: { slug?: string[] } = router.query;
 

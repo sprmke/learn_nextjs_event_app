@@ -1,4 +1,4 @@
-export interface Event {
+export type Event = {
   id: string;
   title: string;
   description?: string;
@@ -7,4 +7,10 @@ export interface Event {
   image: string;
   imageAlt?: string;
   isFeatured?: boolean;
-}
+};
+
+export type Comment = {
+  email: string;
+  name: string;
+  text: string;
+};
