@@ -7,7 +7,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET': {
       const { eventId } = req.query as { eventId: string };
 
-      const comments = await getCommentsByEventId(eventId);
+      const comments = await getCommentsByEventId(res, eventId);
 
       res.status(200).json({ message: 'Success', comments });
       break;
@@ -33,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       // save comment to database
       const comment: Comment = { email, name, text, eventId };
 
-      const result = await addComment(comment);
+      const result = await addComment(res, comment);
 
       res
         .status(201)

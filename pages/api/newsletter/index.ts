@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return;
       }
 
-      const result = await signUpNewsletter(email);
+      const result = await signUpNewsletter(res, email);
 
       res.status(201).json({ message: 'Successfully registered' });
 
