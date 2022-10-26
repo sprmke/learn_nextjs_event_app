@@ -18,6 +18,8 @@ const Comments = ({ eventId }: CommentsProps) => {
     const getComments = async () => {
       const response = await fetch(`/api/comments/${eventId}`);
       const data = await response.json();
+      if (!data) return;
+
       const { comments }: { comments: Comment[] } = data;
       setComments(comments);
       setHasNewcomment(false);
@@ -42,6 +44,8 @@ const Comments = ({ eventId }: CommentsProps) => {
     });
 
     const data = await response.json();
+    if (!data) return;
+
     setHasNewcomment(true);
   };
 

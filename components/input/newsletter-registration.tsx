@@ -22,19 +22,23 @@ const NewsletterRegistration = () => {
       setIsInvalid(false);
     }
 
-    // send valid data to API
-    const response = await fetch('/api/newsletter', {
-      method: 'POST',
-      body: JSON.stringify({
-        email: enteredEmail,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    try {
+      // send valid data to API
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: enteredEmail,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    const data = await response.json();
-    console.log('data::', data);
+      const data = await response.json();
+      console.log('data::', data);
+    } catch (err) {
+      console.error('err::', err);
+    }
   };
 
   return (

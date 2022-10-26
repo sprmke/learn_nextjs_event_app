@@ -3,6 +3,7 @@ import { Event } from '../types';
 export const getAllEvents = async () => {
   const response = await fetch(process.env.NEXT_PUBLIC_FIREBASE_URL);
   const data = await response.json();
+  if (!data) return;
 
   const events: Event[] | [] = Object.values(data);
 

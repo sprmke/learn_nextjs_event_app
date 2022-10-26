@@ -20,6 +20,8 @@ const FitleredEventsPage: NextPage = () => {
   const fetchFilteredEvents = async (url: string) => {
     const response = await fetch(url);
     const data = await response.json();
+    if (!data) return;
+
     const events: Event[] = Object.values(data);
 
     const filteredEvents = getFilteredEvents(events, {
