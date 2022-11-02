@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Notification } from '../types';
 
 type NotificationContextType = {
@@ -16,6 +16,20 @@ const NotificationContext = createContext<NotificationContextType>({
 export const NotificationContextProvider = ({ children }) => {
   const [activeNotification, setActiveNotification] =
     useState<Notification | null>(null);
+
+  // automatically hide notification if status is either success or error
+  useEffect(() => {
+    const { status } = activeNotification || {};
+    if (['success', 'error'].includes(status)) {
+      const timer = setTimeout(() => {
+        setActiveNotification(null);
+      }, 3000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [activeNotification]);
 
   const showNotificationHandler = (notificationData: Notification) => {
     setActiveNotification(notificationData);
