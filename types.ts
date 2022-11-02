@@ -18,3 +18,9 @@ export type Comment = {
   text: string;
   eventId?: string;
 };
+
+export type Notification = {
+  title: string;
+  message: string;
+  status: string;
+};
